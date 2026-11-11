@@ -1,0 +1,262 @@
+networks:
+  arrnetwork:
+    name: arrnetwork
+    ipam:
+      config:
+        - subnet: 172.39.0.0/24
+
+services:
+
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+    networks:
+      arrnetwork:
+        ipv4_address: ${IP_GLUETUN}
+
+    ports:
+      - "8191:8191"       # FlareSolverr
+
+    volumes:
+      - ./gluetun:/gluetun
+
+    environment:
+
+    - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
+    - VPN_TYPE=${VPN_TYPE}
+
+    - OPENVPN_USER=${OPENVPN_USER}
+    - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+    - OPENVPN_PROTOCOL=${OPENVPN_PROTOCOL}
+    - OPENVPN_ENDPOINT_PORT=${OPENVPN_ENDPOINT_PORT}
+    - FREE_ONLY=${FREE_ONLY}
+    - TZ=${TZ}
+
+    healthcheck:
+      test: wget -qO /dev/null http://127.0.0.1:9999 || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+
+    volumes:
+      - ./qbittorrent:/config
+      - /data:/data
+
+    ports:
+      - "8080:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
+    networks:
+      arrnetwork:
+        ipv4_address: 172.39.0.10
+
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8080 || exit 1"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+
+    volumes:
+      - ./prowlarr:/config
+
+    ports:
+      - "9696:9696"
+    
+    networks:
+      arrnetwork:
+        ipv4_address: 172.39.0.9
+
+    restart: unless-stopped
+
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+
+    network_mode: "service:gluetun"
+
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+
+    environment:
+      - LOG_LEVEL=info
+      - TZ=${TZ}
+
+    restart: unless-stopped
+
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+
+    volumes:
+      - ./radarr:/config
+      - /data:/data
+
+    ports:
+      - "7878:7878"
+    
+    dns:
+      - 
+
+    networks:
+      arrnetwork:
+        ipv4_address: ${IP_RADARR}
+
+    restart: unless-stopped
+
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+
+    volumes:
+      - ./sonarr:/config
+      - /data:/data
+
+    ports:
+      - "8989:8989"
+  
+    dns:
+      - 
+
+    networks:
+      arrnetwork:
+        ipv4_address: ${IP_SONARR}
+
+    restart: unless-stopped
+
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+
+    volumes:
+      - ./bazarr:/config
+      - /data:/data
+
+    ports:
+      - "6767:6767"
+
+    networks:
+      arrnetwork:
+        ipv4_address: ${IP_BAZARR}
+
+    restart: unless-stopped
+
+
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+
+    volumes:
+      - jellyfin_config:/config
+      - jellyfin_cache:/cache
+      - /data/media:/data/media
+
+    ports:
+      - "8096:8096"
+
+    networks:
+      arrnetwork:
+        ipv4_address: ${IP_JELLYFIN}
+
+    restart: unless-stopped
+
+
+  seerr:
+    image: ghcr.io/seerr-team/seerr:v3.0.1
+    container_name: seerr
+    init: true
+
+    environment:
+      - LOG_LEVEL=info
+      - TZ=${TZ}
+      - PORT=5055
+
+    volumes:
+      - seerr_config:/app/config
+
+    ports:
+      - "5055:5055"
+
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+
+    networks:
+      arrnetwork:
+        ipv4_address: ${IP_SEERR}
+
+    restart: unless-stopped
+
+
+volumes:
+  seerr_config:
+
+  jellyfin_config:
+    external: true
+
+  jellyfin_cache:
+    external: true
