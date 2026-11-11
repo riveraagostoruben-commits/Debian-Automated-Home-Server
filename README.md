@@ -25,3 +25,6 @@ Key Features
 - Remote access through Tailscale
 - Network-wide DNS filtering with Pi-hole
 - VPN networking configuration using Gluetun
+
+Server running on OptiPlex 7040
+
