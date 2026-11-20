@@ -30,8 +30,7 @@ Key Features
 ## System Architecture
 
 The home server runs Debian Linux with Docker Compose
-to manage containerized applications for media automation,
-storage management, and remote access.
+to manage containerized applications for media automation.
 
 The architecture integrates Jellyfin, Sonarr, Radarr,
 Prowlarr, Bazarr, qBittorrent, Seerr, and Gluetun.
