@@ -42,26 +42,36 @@ Server running on OptiPlex 7040
 
 
 ## Jellyfin
+Jellyfin is the integrated media player to stream content directly through a web browser or supported devices.
 ![Jellyfin](Pictures/Jellyfin-main-paige.png)
 
 ## Movie Page
 ![Jellyfin Movies](Pictures/Jellyfin-movie.png)
 
 ## Seerr
+It integrates with Sonarr and Radarr to automate the process of managing requested content.
 ![Seerr](Pictures/Seerr-main-paige.png)
 
 ## Movie Request Page
+The request allows users to select movies or TV shows they want added to the media library.
 ![Seerr Requests](Pictures/Seerr-movie-request.png)
 
 ## Prowlarr
+Prowlarr is the management of indexers used by Sonarr and Radarr.
 ![Prowlarr](Pictures/Prowlarr.png)
 
 ## Sonarr
+TV series monitoring, downloading and organization.
+It integrates with Prowlarr for indexer management and qBittorrent for downloads. After downloads are completed, Sonarr can import and organize TV episodes into the appropriate folders within /data/media/Shows.
 ![Sonarr](Pictures/Sonarr.png)
 
 ## Radarr
+Movies monitoring, downloading and organization.
+It integrates with Prowlarr for indexer management and qBittorrent for downloads.
 ![Radarr](Pictures/Radarr.png)
 
 ## qBittorrent
+Integrated with Sonarr and Radarr.
+Manages downloads and provides web interface for monitoring transfer progress, connection status and download activity.
 ![qBittorrent](Pictures/qBittorrent.png)
 
