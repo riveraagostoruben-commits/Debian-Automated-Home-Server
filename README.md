@@ -37,7 +37,13 @@ Prowlarr, Bazarr, qBittorrent, Seerr, and Gluetun.
 
 ![Home Server Architecture](Home-Server-Architecture.png)
 
-Server running on OptiPlex 7040
+## Hardware
+
+System Model: Dell OptiPlex 7040 Micro
+Operatin System: Debian Linux 13.7
+RAM: 16GB DDR4
+Storage: Primary- 512GB Sata, Secondary- 1TB NVMe SSD
+
 
 
 
