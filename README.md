@@ -42,16 +42,16 @@ Server running on OptiPlex 7040
 
 
 ## Jellyfin
-![Jellyfin](Pictures/Jellyfin.png)
+![Jellyfin](Pictures/Jellyfin-main-paige.png)
 
 ## Movie Page
-![Jellyfin Movies](Pictures/Jellyfin-movies.png)
+![Jellyfin Movies](Pictures/Jellyfin-movie.png)
 
 ## Seerr
-![Seerr](Pictures/Seerr.png)
+![Seerr](Pictures/Seerr-main-paige.png)
 
 ## Movie Request Page
-![Seerr Requests](Pictures/Seerr-requests.png)
+![Seerr Requests](Pictures/Seerr-movie-request.png)
 
 ## Prowlarr
 ![Prowlarr](Pictures/Prowlarr.png)
