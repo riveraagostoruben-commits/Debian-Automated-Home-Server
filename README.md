@@ -26,5 +26,18 @@ Key Features
 - Network-wide DNS filtering with Pi-hole
 - VPN networking configuration using Gluetun
 
+
+## System Architecture
+
+The home server runs Debian Linux with Docker Compose
+to manage containerized applications for media automation,
+storage management, and remote access.
+
+The architecture integrates Jellyfin, Sonarr, Radarr,
+Prowlarr, Bazarr, qBittorrent, Seerr, and Gluetun.
+
+![Home Server Architecture](Home-Server-
+Architecture.png)
+
 Server running on OptiPlex 7040
 
