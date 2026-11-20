@@ -40,26 +40,28 @@ Prowlarr, Bazarr, qBittorrent, Seerr, and Gluetun.
 Server running on OptiPlex 7040
 
 
+
 ## Jellyfin
-![Jellyfin](Picture/jellyfin.png)
+![Jellyfin](Pictures/jellyfin.png)
 
 ## Movie Page
-![Jellyfin Movies](Picture/jellyfin-movies.png)
+![Jellyfin Movies](Pictures/jellyfin-movies.png)
 
 ## Seerr
-![Seerr](Picture/seerr.png)
+![Seerr](Pictures/seerr.png)
 
 ## Movie Request Page
-![Seerr Requests](Picture/seerr-requests.png)
+![Seerr Requests](Pictures/seerr-requests.png)
 
 ## Prowlarr
-![Prowlarr](Picture/prowlarr.png)
+![Prowlarr](Pictures/prowlarr.png)
 
 ## Sonarr
-![Sonarr](Picture/sonarr.png)
+![Sonarr](Pictures/sonarr.png)
 
 ## Radarr
-![Radarr](Picture/radarr.png)
+![Radarr](Pictures/radarr.png)
 
 ## qBittorrent
-![qBittorrent](Picture/qbittorrent.png)
+![qBittorrent](Pictures/qbittorrent.png)
+
