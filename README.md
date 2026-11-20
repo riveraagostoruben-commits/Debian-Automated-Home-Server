@@ -36,8 +36,7 @@ storage management, and remote access.
 The architecture integrates Jellyfin, Sonarr, Radarr,
 Prowlarr, Bazarr, qBittorrent, Seerr, and Gluetun.
 
-![Home Server Architecture](Home-Server-
-Architecture.png)
+![Home Server Architecture](Home-Server-Architecture.png)
 
 Server running on OptiPlex 7040
 
