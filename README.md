@@ -39,3 +39,14 @@ Prowlarr, Bazarr, qBittorrent, Seerr, and Gluetun.
 
 Server running on OptiPlex 7040
 
+## Jellyfin
+
+## Seerr
+
+## Prowlarr
+
+## Sonarr
+
+## Radarr
+
+## qBittorrent
